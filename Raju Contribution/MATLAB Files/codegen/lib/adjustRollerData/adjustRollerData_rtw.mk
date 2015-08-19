@@ -5,7 +5,7 @@
 ## 
 ## Makefile Info:
 ## 
-## Final product: $(RELATIVE_PATH_TO_ANCHOR)/adjustRollerData.lib
+## Final product: $(RELATIVE_PATH_TO_ANCHOR)\adjustRollerData.lib
 ## Product type : static-library
 ## 
 ## MATLAB Coder version: 2.4 (R2013a)
@@ -28,14 +28,15 @@ PRODUCT_NAME              = adjustRollerData
 MAKEFILE                  = adjustRollerData_rtw.mk
 COMPUTER                  = PCWIN
 ARCH                      = win32
-MATLAB_ROOT               = C:/PROGRA~1/MATLAB/R2013a
-START_DIR                 = C:/Users/ASADUL~1/DOCUME~1/GitHub/MAGNET~1/RAJUCO~1/MATLAB~1/codegen/lib/ADJUST~1
+MATLAB_ROOT               = C:\PROGRA~1\MATLAB\R2013a
+START_DIR                 = C:\Users\Raju\Desktop\Github\MAGNET~1\RAJUCO~1\MATLAB~1\codegen\lib\ADJUST~1
 RELATIVE_PATH_TO_ANCHOR   = .
-MATLAB_BIN                = $(MATLAB_ROOT)/bin
-MATLAB_ARCH_BIN           = $(MATLAB_ROOT)/bin/win32
-PERL                      = $(MATLAB_ROOT)/sys/perl/win32/bin/perl.exe
-GEN_LNK_SCRIPT            = $(MATLAB_ROOT)/rtw/c/tools/mkvc_lnk.pl
+MATLAB_BIN                = $(MATLAB_ROOT)\bin
+MATLAB_ARCH_BIN           = $(MATLAB_ROOT)\bin\win32
+PERL                      = $(MATLAB_ROOT)\sys\perl\win32\bin\perl.exe
+GEN_LNK_SCRIPT            = $(MATLAB_ROOT)\rtw\c\tools\mkvc_lnk.pl
 CMD_FILE                  = $(PRODUCT_NAME).lnk
+NODEBUG                   = 1
 
 ###########################################################################
 ## TOOLCHAIN SPECIFICATIONS
@@ -43,22 +44,22 @@ CMD_FILE                  = $(PRODUCT_NAME).lnk
 
 TOOLCHAIN_MAKEFILE = adjustRollerData_rtw_tools.mk
 
--include adjustRollerData_rtw_tools.mk
+!include adjustRollerData_rtw_tools.mk
 
 
 ###########################################################################
 ## OUTPUT INFO
 ###########################################################################
 
-PRODUCT = $(RELATIVE_PATH_TO_ANCHOR)/adjustRollerData.lib
+PRODUCT = $(RELATIVE_PATH_TO_ANCHOR)\adjustRollerData.lib
 PRODUCT_TYPE = "static-library"
 BUILD_TYPE = "Static Library"
 
-###########################################################################
-## INCLUDE PATHS
-###########################################################################
+#################################################################
+# INCLUDE PATHS
+#################################################################
 
-INCLUDES_BUILDINFO = -IC:/Users/ASADUL~1/DOCUME~1/GitHub/MAGNET~1/RAJUCO~1/MATLAB~1 -I$(START_DIR) -I$(MATLAB_ROOT)/extern/include -I$(MATLAB_ROOT)/simulink/include -I$(MATLAB_ROOT)/rtw/c/src -I$(MATLAB_ROOT)/rtw/c/src/ext_mode/common -I$(MATLAB_ROOT)/rtw/c/ert
+INCLUDES_BUILDINFO = C:\Users\Raju\Desktop\Github\MAGNET~1\RAJUCO~1\MATLAB~1;$(START_DIR);$(MATLAB_ROOT)\extern\include;$(MATLAB_ROOT)\simulink\include;$(MATLAB_ROOT)\rtw\c\src;$(MATLAB_ROOT)\rtw\c\src\ext_mode\common;$(MATLAB_ROOT)\rtw\c\ert
 
 INCLUDES = $(INCLUDES_BUILDINFO)
 
@@ -74,7 +75,7 @@ DEFINES = $(DEFINES_STANDARD)
 ## SOURCE FILES
 ###########################################################################
 
-SRCS = $(START_DIR)/adjustRollerData_data.c $(START_DIR)/adjustRollerData_initialize.c $(START_DIR)/adjustRollerData_terminate.c $(START_DIR)/adjustRollerData.c $(START_DIR)/rand.c $(START_DIR)/adjustRollerData_emxutil.c $(START_DIR)/rt_nonfinite.c $(START_DIR)/rtGetNaN.c $(START_DIR)/rtGetInf.c
+SRCS = $(START_DIR)\adjustRollerData_data.c $(START_DIR)\adjustRollerData_initialize.c $(START_DIR)\adjustRollerData_terminate.c $(START_DIR)\adjustRollerData.c $(START_DIR)\rand.c $(START_DIR)\adjustRollerData_emxutil.c $(START_DIR)\rt_nonfinite.c $(START_DIR)\rtGetNaN.c $(START_DIR)\rtGetInf.c
 
 ###########################################################################
 ## OBJECTS
@@ -102,22 +103,30 @@ SYSTEM_LIBS =
 # C Compiler
 #---------------
 
-CFLAGS_BASIC = $(DEFINES) $(INCLUDES)
+CFLAGS_BASIC = $(DEFINES) 
 
-CFLAGS += $(CFLAGS_BASIC)
+CFLAGS = $(CFLAGS) $(CFLAGS_BASIC)
+
+#-----------------
+# C++ Compiler
+#-----------------
+
+CPPFLAGS_BASIC = $(DEFINES) 
+
+CPPFLAGS = $(CPPFLAGS) $(CPPFLAGS_BASIC)
 
 ###########################################################################
 ## PHONY TARGETS
 ###########################################################################
 
-.PHONY : all build clean info prebuild download execute
+.PHONY : all build clean info prebuild download execute set_environment_variables
 
 
 all : build
-	@echo "### Successfully generated all binary outputs."
+	@cmd /C "@echo ### Successfully generated all binary outputs."
 
 
-build : prebuild $(PRODUCT)
+build : set_environment_variables prebuild $(PRODUCT)
 
 
 prebuild : 
@@ -129,6 +138,11 @@ download : build
 execute : download
 
 
+set_environment_variables : 
+	@set INCLUDE=$(INCLUDES);$(INCLUDE)
+	@set LIB=$(LIB)
+
+
 ###########################################################################
 ## FINAL TARGET
 ###########################################################################
@@ -138,15 +152,15 @@ execute : download
 #---------------------------------
 
 $(PRODUCT) : $(OBJS)
-	@echo "### Creating command file: $(CMD_FILE)"
+	@cmd /C "@echo ### Creating command file: $(CMD_FILE)"
 	$(PERL) $(GEN_LNK_SCRIPT) $(CMD_FILE) $(OBJS)
-	@echo "### Created: $(CMD_FILE)"
-	@echo "### Creating static library "$(PRODUCT)" ..."
-	$(AR) $(ARFLAGS) /out:$(PRODUCT) @$(CMD_FILE)
-	@echo "### Created: $(PRODUCT)"
-	@echo "### Deleting command file: $(CMD_FILE)"
+	@cmd /C "@echo ### Created: $(CMD_FILE)"
+	@cmd /C "@echo ### Creating static library "$(PRODUCT)" ..."
+	$(AR) $(ARFLAGS) -out:$(PRODUCT) @$(CMD_FILE)
+	@cmd /C "@echo ### Created: $(PRODUCT)"
+	@cmd /C "@echo ### Deleting command file: $(CMD_FILE)"
 	$(RM) $(CMD_FILE)
-	@echo "### Deleted: $(CMD_FILE)"
+	@cmd /C "@echo ### Deleted: $(CMD_FILE)"
 
 
 ###########################################################################
@@ -157,29 +171,54 @@ $(PRODUCT) : $(OBJS)
 # SOURCE-TO-OBJECT
 #---------------------
 
-%.obj : %.c
-	@echo "### Compiling "$<" ..."
+.c.obj :
+	@cmd /C "@echo ### Compiling "$<" ..."
 	$(CC) $(CFLAGS) -Fo"$@" "$<"
 
 
-%.obj : $(RELATIVE_PATH_TO_ANCHOR)\%.c
-	@echo "### Compiling "$<" ..."
+.cpp.obj :
+	@cmd /C "@echo ### Compiling "$<" ..."
+	$(CPP) $(CPPFLAGS) -Fo"$@" "$<"
+
+
+{$(RELATIVE_PATH_TO_ANCHOR)}.c.obj :
+	@cmd /C "@echo ### Compiling "$<" ..."
 	$(CC) $(CFLAGS) -Fo"$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/rtw/c/src\%.c
-	@echo "### Compiling "$<" ..."
+{$(RELATIVE_PATH_TO_ANCHOR)}.cpp.obj :
+	@cmd /C "@echo ### Compiling "$<" ..."
+	$(CPP) $(CPPFLAGS) -Fo"$@" "$<"
+
+
+{$(MATLAB_ROOT)\rtw\c\src}.c.obj :
+	@cmd /C "@echo ### Compiling "$<" ..."
 	$(CC) $(CFLAGS) -Fo"$@" "$<"
 
 
-%.obj : $(START_DIR)\%.c
-	@echo "### Compiling "$<" ..."
+{$(MATLAB_ROOT)\rtw\c\src}.cpp.obj :
+	@cmd /C "@echo ### Compiling "$<" ..."
+	$(CPP) $(CPPFLAGS) -Fo"$@" "$<"
+
+
+{$(START_DIR)}.c.obj :
+	@cmd /C "@echo ### Compiling "$<" ..."
 	$(CC) $(CFLAGS) -Fo"$@" "$<"
 
 
-%.obj : C:/Users/ASADUL~1/DOCUME~1/GitHub/MAGNET~1/RAJUCO~1/MATLAB~1\%.c
-	@echo "### Compiling "$<" ..."
+{$(START_DIR)}.cpp.obj :
+	@cmd /C "@echo ### Compiling "$<" ..."
+	$(CPP) $(CPPFLAGS) -Fo"$@" "$<"
+
+
+{C:\Users\Raju\Desktop\Github\MAGNET~1\RAJUCO~1\MATLAB~1}.c.obj :
+	@cmd /C "@echo ### Compiling "$<" ..."
 	$(CC) $(CFLAGS) -Fo"$@" "$<"
+
+
+{C:\Users\Raju\Desktop\Github\MAGNET~1\RAJUCO~1\MATLAB~1}.cpp.obj :
+	@cmd /C "@echo ### Compiling "$<" ..."
+	$(CPP) $(CPPFLAGS) -Fo"$@" "$<"
 
 
 ###########################################################################
@@ -194,31 +233,34 @@ $(OBJS) : $(MAKEFILE) rtw_proj.tmw $(TOOLCHAIN_MAKEFILE)
 ###########################################################################
 
 info : 
-	@echo "###  PRODUCT = $(PRODUCT)"
-	@echo "###  PRODUCT_TYPE = $(PRODUCT_TYPE)"
-	@echo "###  BUILD_TYPE = $(BUILD_TYPE)"
-	@echo "###  INCLUDES = $(INCLUDES)"
-	@echo "###  DEFINES = $(DEFINES)"
-	@echo "###  SRCS = $(SRCS)"
-	@echo "###  OBJS = $(OBJS)"
-	@echo "###  LIBS = $(LIBS)"
-	@echo "###  MODELREF_LIBS = $(MODELREF_LIBS)"
-	@echo "###  SYSTEM_LIBS = $(SYSTEM_LIBS)"
-	@echo "###  TOOLCHAIN_LIBS = $(TOOLCHAIN_LIBS)"
-	@echo "###  CFLAGS = $(CFLAGS)"
-	@echo "###  ARFLAGS = $(ARFLAGS)"
-	@echo "###  LDFLAGS = $(LDFLAGS)"
-	@echo "###  SHAREDLIB_LDFLAGS = $(SHAREDLIB_LDFLAGS)"
-	@echo "###  MEX_CFLAGS = $(MEX_CFLAGS)"
-	@echo "###  MEX_LDFLAGS = $(MEX_LDFLAGS)"
-	@echo "###  DOWNLOAD_FLAGS = $(DOWNLOAD_FLAGS)"
-	@echo "###  EXECUTE_FLAGS = $(EXECUTE_FLAGS)"
-	@echo "###  MAKE_FLAGS = $(MAKE_FLAGS)"
+	@cmd /C "@echo ###  PRODUCT = $(PRODUCT)"
+	@cmd /C "@echo ###  PRODUCT_TYPE = $(PRODUCT_TYPE)"
+	@cmd /C "@echo ###  BUILD_TYPE = $(BUILD_TYPE)"
+	@cmd /C "@echo ###  INCLUDES = $(INCLUDES)"
+	@cmd /C "@echo ###  DEFINES = $(DEFINES)"
+	@cmd /C "@echo ###  SRCS = $(SRCS)"
+	@cmd /C "@echo ###  OBJS = $(OBJS)"
+	@cmd /C "@echo ###  LIBS = $(LIBS)"
+	@cmd /C "@echo ###  MODELREF_LIBS = $(MODELREF_LIBS)"
+	@cmd /C "@echo ###  SYSTEM_LIBS = $(SYSTEM_LIBS)"
+	@cmd /C "@echo ###  TOOLCHAIN_LIBS = $(TOOLCHAIN_LIBS)"
+	@cmd /C "@echo ###  CFLAGS = $(CFLAGS)"
+	@cmd /C "@echo ###  CPPFLAGS = $(CPPFLAGS)"
+	@cmd /C "@echo ###  ARFLAGS = $(ARFLAGS)"
+	@cmd /C "@echo ###  LDFLAGS = $(LDFLAGS)"
+	@cmd /C "@echo ###  SHAREDLIB_LDFLAGS = $(SHAREDLIB_LDFLAGS)"
+	@cmd /C "@echo ###  MEX_CFLAGS = $(MEX_CFLAGS)"
+	@cmd /C "@echo ###  MEX_LDFLAGS = $(MEX_LDFLAGS)"
+	@cmd /C "@echo ###  DOWNLOAD_FLAGS = $(DOWNLOAD_FLAGS)"
+	@cmd /C "@echo ###  EXECUTE_FLAGS = $(EXECUTE_FLAGS)"
+	@cmd /C "@echo ###  MAKE_FLAGS = $(MAKE_FLAGS)"
 
 
 clean : 
 	$(ECHO) "###  Deleting $(PRODUCT) and all derived files..."
 	$(RM) $(PRODUCT) $(OBJS)
+	$(RM) *_win32.exp
+	$(RM) *_win32.lib
 	$(RM) *$(EXE_EXT)
 	$(RM) *$(OBJ_EXT)
 	$(RM) *$(SHAREDLIB_EXT)

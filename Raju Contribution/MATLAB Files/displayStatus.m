@@ -18,10 +18,10 @@ disp(['The box speed is   = ' num2str(speed_box)]);
 disp(['The cv value of resultant data is  = ' num2str(cvVal)]);
 
 %Display metal status
-if metal_stat==1; %BOX present
+if metal_stat==0; %Noise present
     disp('CLEAN BOX-- NO METAL PRESENT');
 end
-if metal_stat==0; %Noise present
+if metal_stat==1; %BOX present
     disp('CONTAMINATED BOX--METAL DETECTED');
 end
 

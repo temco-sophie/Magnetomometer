@@ -9,7 +9,7 @@ optoData= test_obtData; %#codegen
 contOne=0;
 temp=zeros(size(optoData));
 for i=1:length(optoData)-1    
-    if optoData(i)==100 && optoData(i+1)==100 %Continous check
+    if optoData(i)==1 && optoData(i+1)==1 %Continous check
         if i==length(optoData)-1 %if last element has 100           
             contOne=contOne+2;
             temp(i)=contOne;  
@@ -17,10 +17,10 @@ for i=1:length(optoData)-1
             contOne=contOne+1;
         end
     end 
-    if contOne>0 && optoData(i)==100 && optoData(i+1)==0 %Ending check
+    if contOne>0 && optoData(i)==1 && optoData(i+1)==0 %Ending check
         contOne=contOne+1;
     end
-    if contOne==0 && optoData(i)==100 && optoData(i+1)==0 %Just for single '1'
+    if contOne==0 && optoData(i)==1 && optoData(i+1)==0 %Just for single '1'
         contOne=contOne+1;
     end
     if contOne>0 && optoData(i)==0

@@ -7,7 +7,8 @@ function [test_obtData] = dataRead(test1)
 
 %- NaN is replaced with 0
 test1(isnan(test1))=0; %#codegen
-test1_data= test1(2:239,2:end); 
+% test1_data= test1(2:474,2:end); 
+test1_data= test1; 
 % test1_data= test1(125:126,2:end);
 opto_data=test1_data(:,2);
 x1_data=test1_data(:,3);
@@ -16,9 +17,11 @@ z1_data=test1_data(:,5);
 x2_data=test1_data(:,6);
 y2_data=test1_data(:,7);
 z2_data=test1_data(:,8);
-time_data= length (opto_data);
+% time_data= length (opto_data);
+time_data= test1_data(:,1);
 test_obtData=zeros(size(test1_data));
-test_obtData(:,1)=1:time_data;
+% test_obtData(:,1)=1:time_data;
+test_obtData(:,1)=time_data;
 test_obtData(:,2)=opto_data;
 test_obtData(:,3)=x1_data;
 test_obtData(:,4)=y1_data;

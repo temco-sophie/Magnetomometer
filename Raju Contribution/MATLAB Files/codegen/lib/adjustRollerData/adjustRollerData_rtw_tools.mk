@@ -5,8 +5,8 @@
 ## 
 ## Makefile Info:
 ## 
-## Toolchain Name:          LCC-win32 v2.4.1 | gmake (32-bit Windows)
-## Supported Version(s):    2.4.1
+## Toolchain Name:          Microsoft Visual C++ 2010 v10.0 | nmake (32-bit Windows)
+## Supported Version(s):    10.0
 ## ToolchainInfo Version:   R2013a
 ## Specification Revision:  1.0
 ## 
@@ -15,19 +15,32 @@
 ###########################################################################
 
 
+!include <ntwin32.mak>
 
+
+#-------------------------------------------
+# Macros assumed to be defined elsewhere
+#-------------------------------------------
+
+# NODEBUG
+# cvarsdll
+# cvarsmt
+# conlibsmt
+# ldebug
+# conflags
+# cflags
 
 #-----------
 # MACROS
 #-----------
 
-LCC_ROOT           = $(MATLAB_ROOT)/sys/lcc
-LCC_BUILDLIB       = $(LCC_ROOT)/bin/buildlib
-LCC_LIB            = $(LCC_ROOT)/lib
-MW_EXTERNLIB_DIR   = $(MATLAB_ROOT)/extern/lib/win32/lcc
-MW_LIB_DIR         = $(MATLAB_ROOT)/lib/win32
-TOOLCHAIN_INCLUDES = -I$(LCC_ROOT)/include
-MEX_OPTS_FILE      = $(MATLAB_BIN)/win32/mexopts/lccopts.bat
+MEX_OPTS_FILE    = $(MATLAB_ROOT)\bin\$(ARCH)\mexopts\msvc100opts.bat
+MW_EXTERNLIB_DIR = $(MATLAB_ROOT)\extern\lib\win32\microsoft
+MW_LIB_DIR       = $(MATLAB_ROOT)\lib\win32
+MEX_ARCH         = -win32
+APPVER           = 5.0
+CVARSFLAG        = $(cvarsmt)
+LIBS_TOOLCHAIN   = $(conlibsmt) libcpmt.lib
 
 TOOLCHAIN_SRCS = 
 TOOLCHAIN_INCS = 
@@ -37,21 +50,21 @@ TOOLCHAIN_LIBS =
 # BUILD TOOL COMMANDS
 #------------------------
 
-# C Compiler: Lcc-win32 C Compiler
-CC_PATH = $(LCC_ROOT)/bin
-CC = $(CC_PATH)/lcc
+# C Compiler: Microsoft Visual C Compiler
+CC = cl
 
-# Archiver: Lcc-win32 Archiver
-AR_PATH = $(LCC_ROOT)/bin
-AR = $(AR_PATH)/lcclib
+# C++ Compiler: Microsoft Visual C++ Compiler
+CPP = cl
 
-# Linker: Lcc-win32 Linker
-LD_PATH = $(LCC_ROOT)/bin
-LD = $(LD_PATH)/lcclnk
+# Archiver: Microsoft Visual C/C++ Archiver
+AR = lib
+
+# Linker: Microsoft Visual C/C++ Linker
+LD = link
 
 # MEX Tool: MEX Tool
 MEX_PATH = $(MATLAB_BIN)
-MEX = $(MEX_PATH)/mex
+MEX = $(MEX_PATH)\mex
 
 # Download: Download
 DOWNLOAD =
@@ -59,23 +72,24 @@ DOWNLOAD =
 # Execute: Execute
 EXECUTE = $(PRODUCT)
 
-# Builder Application: GMAKE Utility
-MAKE_PATH = %MATLAB%\bin\win32
-MAKE = $(MAKE_PATH)/gmake
+# Builder Application: NMAKE Utility
+MAKE = nmake
 
 
 #-------------------------
 # Directives/Utilities
 #-------------------------
 
-CDEBUG              = -g
+CDEBUG              = -Zi
 C_OUTPUT_FLAG       = -Fo
+CPPDEBUG            = -Zi
+CPP_OUTPUT_FLAG     = -Fo
 ARDEBUG             =
-STATICLIB_OUTPUT_FLAG = /out:
+STATICLIB_OUTPUT_FLAG = -out:
 LDDEBUG             =
-OUTPUT_FLAG         = -o
+OUTPUT_FLAG         = -out:
 MEX_DEBUG           = -g
-RM                  = @rm -f
+RM                  = @del
 ECHO                = @echo
 MV                  = @mv
 RUN                 = @cmd /C
@@ -84,15 +98,19 @@ RUN                 = @cmd /C
 # "Faster Builds" Build Configuration
 #----------------------------------------
 
-ARFLAGS              =
-CFLAGS               = -c -noregistrylookup -I$(LCC_ROOT)/include
+ARFLAGS              = /nologo
+CFLAGS               = $(cflags) $(CVARSFLAG) /wd4996 /fp:precise \
+                       /Od /Oy-
+CPPFLAGS             = $(cflags) $(CVARSFLAG) /wd4996 /fp:precise /EHsc- \
+                       /Od /Oy-
 DOWNLOAD_FLAGS       =
 EXECUTE_FLAGS        =
-LDFLAGS              = -s -L$(LCC_LIB) $(LCC_LIB)/wsock32.lib $(LDFLAGS_ADDITIONAL)
-MEX_CFLAGS           = -win32 $(MEX_SRC) $(MEX_OPT_FILE)$(INCLUDES) -outdir $(RELATIVE_PATH_TO_ANCHOR)
-MEX_LDFLAGS          = LINKFLAGS="$$LINKFLAGS $(LDFLAGS_ADDITIONAL)"
+LDFLAGS              = $(ldebug) $(conflags) $(LIBS_TOOLCHAIN)
+MEX_CFLAGS           = $(MEX_ARCH) OPTIMFLAGS="/Od /Oy- $(MDFLAG) $(DEFINES)" $(MEX_OPTS_FLAG)
+MEX_LDFLAGS          = LDFLAGS=='$$LDFLAGS'
 MAKE_FLAGS           = -f $(MAKEFILE)
-SHAREDLIB_LDFLAGS    = -dll -s -L$(LCC_LIB) $(LCC_LIB)/wsock32.lib $(LDFLAGS_ADDITIONAL) $(DEF_FILE)
+SHAREDLIB_LDFLAGS    = $(ldebug) $(conflags) $(LIBS_TOOLCHAIN) \
+                       -dll -def:$(DEF_FILE)
 
 #--------------------
 # File extensions
@@ -101,6 +119,9 @@ SHAREDLIB_LDFLAGS    = -dll -s -L$(LCC_LIB) $(LCC_LIB)/wsock32.lib $(LDFLAGS_ADD
 H_EXT               = .h
 OBJ_EXT             = .obj
 C_EXT               = .c
+HPP_EXT             = .hpp
+OBJ_EXT             = .obj
+CPP_EXT             = .cpp
 STATICLIB_EXT       = .lib
 EXE_EXT             = .exe
 SHAREDLIB_EXT       = .dll
