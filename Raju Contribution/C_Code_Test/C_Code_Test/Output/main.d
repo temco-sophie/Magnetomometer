@@ -21,7 +21,7 @@
 ..\output\main.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\limits.h
 ..\output\main.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdlib.h
 ..\output\main.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\string.h
-..\output\main.o: ..\FFT_CO2\FFT_CO2.h
-..\output\main.o: ..\FFT_CO2\rt_nonfinite.h
-..\output\main.o: ..\FFT_CO2\rtwtypes.h
-..\output\main.o: ..\FFT_CO2\FFT_CO2_types.h
+..\output\main.o: ..\fft_fp\fft_fp.h
+..\output\main.o: ..\fft_fp\rt_nonfinite.h
+..\output\main.o: ..\fft_fp\rtwtypes.h
+..\output\main.o: ..\fft_fp\fft_fp_types.h

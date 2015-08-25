@@ -361,7 +361,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER, STM32F10X_HD</Define>
               <Undefine></Undefine>
-              <IncludePath>..\CMSIS;..\USER;..\FWlib\inc;..\FWlib\src;..\TEST_CODE;..\FFT_CO2</IncludePath>
+              <IncludePath>..\CMSIS;..\USER;..\FWlib\inc;..\FWlib\src;..\TEST_CODE;..\fft_fp</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -487,37 +487,37 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>FFT_CO2</GroupName>
+          <GroupName>fft_fp</GroupName>
           <Files>
             <File>
-              <FileName>FFT_CO2.c</FileName>
+              <FileName>fft_fp.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\FFT_CO2\FFT_CO2.c</FilePath>
+              <FilePath>..\fft_fp\fft_fp.c</FilePath>
             </File>
             <File>
-              <FileName>FFT_CO2_initialize.c</FileName>
+              <FileName>fft_fp_initialize.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\FFT_CO2\FFT_CO2_initialize.c</FilePath>
+              <FilePath>..\fft_fp\fft_fp_initialize.c</FilePath>
             </File>
             <File>
-              <FileName>FFT_CO2_terminate.c</FileName>
+              <FileName>fft_fp_terminate.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\FFT_CO2\FFT_CO2_terminate.c</FilePath>
+              <FilePath>..\fft_fp\fft_fp_terminate.c</FilePath>
             </File>
             <File>
               <FileName>rt_nonfinite.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\FFT_CO2\rt_nonfinite.c</FilePath>
+              <FilePath>..\fft_fp\rt_nonfinite.c</FilePath>
             </File>
             <File>
               <FileName>rtGetInf.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\FFT_CO2\rtGetInf.c</FilePath>
+              <FilePath>..\fft_fp\rtGetInf.c</FilePath>
             </File>
             <File>
               <FileName>rtGetNaN.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\FFT_CO2\rtGetNaN.c</FilePath>
+              <FilePath>..\fft_fp\rtGetNaN.c</FilePath>
             </File>
           </Files>
         </Group>

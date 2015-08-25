@@ -1,0 +1,9 @@
+..\output\fft_fp.o: ..\fft_fp\fft_fp.c
+..\output\fft_fp.o: ..\fft_fp\rt_nonfinite.h
+..\output\fft_fp.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stddef.h
+..\output\fft_fp.o: ..\fft_fp\rtwtypes.h
+..\output\fft_fp.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\limits.h
+..\output\fft_fp.o: ..\fft_fp\fft_fp.h
+..\output\fft_fp.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\math.h
+..\output\fft_fp.o: C:\Keil_v5\ARM\ARMCC\bin\..\include\stdlib.h
+..\output\fft_fp.o: ..\fft_fp\fft_fp_types.h

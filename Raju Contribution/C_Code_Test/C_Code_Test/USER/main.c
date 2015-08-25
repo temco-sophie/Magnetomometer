@@ -11,7 +11,7 @@
 #include "rt_nonfinite.h"
 
 #include "rtwtypes.h"
-#include "FFT_CO2.h"
+#include "fft_fp.h"
 
 
 /**
@@ -20,7 +20,7 @@
   * @retval : None
   */
 u8 print_buffer[1000]; 
-const int_T x[64] = {  //define the input 
+const real_T x[64] = {  //define the input 
 /*1849,
 1757,
 1845,
@@ -274,7 +274,7 @@ const int_T x[64] = {  //define the input
 };
 
 //const real_T value_active =0.0;  //define the input
-real_T X[64];
+//real_T X[64];
 
 int main(void)
 {	 
@@ -289,8 +289,8 @@ int main(void)
 	
 	/*matlab function test*/
 	printf("Raju1");
-	FFT_CO2_initialize();
-	snrdB=FFT_CO2(x);
+	fft_fp_initialize();
+	snrdB=fft_fp(x);
 	
 	printf("%f\r\n",snrdB);	
 	
