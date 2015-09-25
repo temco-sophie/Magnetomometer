@@ -1,17 +1,24 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <conio.h>
 #include <math.h>
+#define col 8
 #include "findBoxSpeed.c"
 #include "checkBox.c"
+#include "find_resultant.c"
+#include "find_CV.c"
+
 
 int findBoxSpeed();
 int checkBox();
-int find_resultant();
+double * find_resultant();
+double find_CV();
 
 int main()
 {
 	
-	int data[10][8] = {
+	
+	int data[][col] = {
 	{1, 0, 289, 242, -151, -43, 20, 437},
 	{2, 0, 289,	242, -151, -43,	20,	437},
 	{3,	0, 277,	221,	-124,	-43,	20,	437},
@@ -23,35 +30,26 @@ int main()
 	{9,	0,	263,	165,	-123,	-61,	-60,356},
 	{10,0,	263,	165,	-123,	-141,	-102,401}
 	};
-	int length,speed_box,box_stat,i;
+	int rows,speed_box,box_stat,i,j;
 	int ref_speed_box=10; //Set for test purpose: The assumption is desired box is active in opto range for 3 second 
     int variation_box=5;
-    
+    double *resultant,cvVal;
    
-  	//length=sizeof(data)/sizeof(data[0]);
-  	length=10;
-  	int *resultant;
-  	printf("Magnetomometer Project Test\n");
-	speed_box=findBoxSpeed(data,length);
+   	rows=sizeof(data)/sizeof(data[0]);
+  	
+  	printf("Magnetomometer Project Test\n");  
+	speed_box=findBoxSpeed(data,rows);
 	box_stat=checkBox(ref_speed_box,speed_box,variation_box);
-	resultant=find_resultant(data,length);
+	resultant=find_resultant(data,rows);
 	
-	for (i=0;i<length-1;++i)
-	 	printf("\nResultant %d",resultant[i]);
+	for(i=0;i<rows;i++){
+		printf("\n Resultant %lf",*(resultant+i));
+	}
 	
-//	for (i = 0; i < length-1; i++)
-	//	printf("Resultant []= %f \n",*(resultant));
-
+	cvVal=find_CV(resultant,rows);
+	
+	printf("\n CV= %lf",cvVal);
+		
 	return 1;
 }
 
-//double find_resultant(double data[][8],int length,double resultant[length])
-int (*(find_resultant)(int data[][8], int length))[8]
-{
-	printf("\nResultant %f",resultant[1]);
-	int i;
-	for (i=0;i<length-1;++i)
-	resultant[i]=data[i][2];
-	return resultant;
-	 
-}

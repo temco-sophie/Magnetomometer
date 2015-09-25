@@ -3,7 +3,7 @@
  *
  * Code generation for function 'findCV'
  *
- * C source code generated on: Wed Aug 19 05:11:01 2015
+ * C source code generated on: Fri Sep 25 12:41:36 2015
  *
  */
 
@@ -18,6 +18,6 @@
 #include "findCV_types.h"
 
 /* Function Declarations */
-extern real_T findCV(const real_T resultant_data[222], const int32_T resultant_size[1]);
+extern real_T findCV(const real_T resultant_data[189], const int32_T resultant_size[1]);
 #endif
 /* End of code generation (findCV.h) */

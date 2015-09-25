@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <deployment-project plugin="plugin.matlabcoder" plugin-version="R2013a">
-  <configuration target="target.matlab.coder" target-name="MEX, C, and C++ Code Generation" name="Magnetometer_c" location="C:\Users\Raju\Desktop\Github\Magnetomometer\Raju Contribution\MATLAB Files" file="C:\Users\Raju\Desktop\Github\Magnetomometer\Raju Contribution\MATLAB Files\Magnetometer_c.prj" build-checksum="873236710">
+  <configuration target="target.matlab.coder" target-name="MEX, C, and C++ Code Generation" name="Magnetometer_c" location="C:\Users\Raju\Desktop\Github\Magnetomometer\Raju Contribution\MATLAB Files" file="C:\Users\Raju\Desktop\Github\Magnetomometer\Raju Contribution\MATLAB Files\Magnetometer_c.prj" build-checksum="1179159969">
     <profile key="profile.mex">
       <param.MergeInstrumentationResults>false</param.MergeInstrumentationResults>
       <param.BuiltInstrumentedMex>false</param.BuiltInstrumentedMex>
@@ -286,11 +286,11 @@
         <param.UseECoderFeatures />
       </unset>
     </profile>
-    <param.outputfile>${PROJECT_ROOT}\codegen\lib\checkLargeNoiseMetal\checkLargeNoiseMetal.lib</param.outputfile>
+    <param.outputfile>${PROJECT_ROOT}\codegen\lib\findCV\findCV.lib</param.outputfile>
     <param.version>R2012a</param.version>
     <param.HasECoderFeatures>true</param.HasECoderFeatures>
     <param.mex.mainhtml />
-    <param.grt.mainhtml>C:\Users\Raju\Desktop\Github\Magnetomometer\Raju Contribution\MATLAB Files\codegen\lib\checkLargeNoiseMetal\html\index.html</param.grt.mainhtml>
+    <param.grt.mainhtml>C:\Users\Raju\Desktop\Github\Magnetomometer\Raju Contribution\MATLAB Files\codegen\lib\findCV\html\index.html</param.grt.mainhtml>
     <param.CallGeneratedCodeFromTest>true</param.CallGeneratedCodeFromTest>
     <param.DefaultTestFile>${PROJECT_ROOT}\adjustRollerData.m</param.DefaultTestFile>
     <param.AutoInferDefaultFile>${PROJECT_ROOT}\main88.m</param.AutoInferDefaultFile>
@@ -298,8 +298,8 @@
     <param.AutoInferUseUnboundedSize>true</param.AutoInferUseUnboundedSize>
     <param.AutoInferVariableSizeThreshold>1024</param.AutoInferVariableSizeThreshold>
     <param.AutoInferUnboundedSizeThreshold>2048</param.AutoInferUnboundedSizeThreshold>
-    <param.mex.outputfile>checkLargeNoiseMetal_mex</param.mex.outputfile>
-    <param.grt.outputfile>checkLargeNoiseMetal</param.grt.outputfile>
+    <param.mex.outputfile>findCV_mex</param.mex.outputfile>
+    <param.grt.outputfile>findCV</param.grt.outputfile>
     <param.artifact>option.target.artifact.lib</param.artifact>
     <param.FixedPointTypeProposalMode>option.FixedPointTypeProposalMode.ProposeFractionLengths</param.FixedPointTypeProposalMode>
     <param.DefaultProposedFixedPointType>numerictype([],16,12)</param.DefaultProposedFixedPointType>
@@ -382,18 +382,12 @@
       <param.DefaultFixedPointSignedness />
     </unset>
     <fileset.entrypoints>
-      <file value="${PROJECT_ROOT}\checkLargeNoiseMetal.m" custom-data-expanded="false">
-        <Inputs fileName="checkLargeNoiseMetal.m" functionName="checkLargeNoiseMetal">
-          <Input Name="cvVal">
+      <file value="${PROJECT_ROOT}\findCV.m" custom-data-expanded="false">
+        <Inputs fileName="findCV.m" functionName="findCV">
+          <Input Name="resultant">
             <Class>double</Class>
             <UserDefined>false</UserDefined>
-            <Size>1 x 1</Size>
-            <Complex>false</Complex>
-          </Input>
-          <Input Name="max_cv">
-            <Class>double</Class>
-            <UserDefined>false</UserDefined>
-            <Size>1 x 1</Size>
+            <Size>:189 x 1</Size>
             <Complex>false</Complex>
           </Input>
         </Inputs>
@@ -407,7 +401,7 @@
     </fileset.testbench>
     <fileset.package />
     <build-deliverables>
-      <file name="checkLargeNoiseMetal.lib" location="${PROJECT_ROOT}\codegen\lib\checkLargeNoiseMetal" optional="false">C:\Users\Raju\Desktop\Github\Magnetomometer\Raju Contribution\MATLAB Files\codegen\lib\checkLargeNoiseMetal\checkLargeNoiseMetal.lib</file>
+      <file name="findCV.lib" location="${PROJECT_ROOT}\codegen\lib\findCV" optional="false">C:\Users\Raju\Desktop\Github\Magnetomometer\Raju Contribution\MATLAB Files\codegen\lib\findCV\findCV.lib</file>
     </build-deliverables>
     <workflow />
     <matlab>

@@ -3,7 +3,7 @@
  *
  * Code generation for function 'findCV'
  *
- * C source code generated on: Wed Aug 19 05:11:01 2015
+ * C source code generated on: Fri Sep 25 12:41:36 2015
  *
  */
 
@@ -12,7 +12,7 @@
 #include "findCV.h"
 
 /* Function Definitions */
-real_T findCV(const real_T resultant_data[222], const int32_T resultant_size[1])
+real_T findCV(const real_T resultant_data[189], const int32_T resultant_size[1])
 {
   real_T cvVal;
   real_T y;
@@ -26,6 +26,7 @@ real_T findCV(const real_T resultant_data[222], const int32_T resultant_size[1])
   /*  This function calculates the coefficient of variation (CV) */
   /*  INPUT resultant -> input vector */
   /*  OUTPUT cvVal -> scalar, coefficient of variation value */
+  /*  Finding MEAN */
   if (resultant_size[0] == 0) {
     y = 0.0;
   } else {
@@ -35,6 +36,7 @@ real_T findCV(const real_T resultant_data[222], const int32_T resultant_size[1])
     }
   }
 
+  /*  Finding standard deviation */
   if (resultant_size[0] > 1) {
     d = resultant_size[0] - 1;
   } else {
@@ -65,6 +67,7 @@ real_T findCV(const real_T resultant_data[222], const int32_T resultant_size[1])
   }
 
   /* standard deviation */
+  /*  Finding Coeeficient of variation */
   cvVal = sqrt(b_y) / (y / (real_T)resultant_size[0]);
 
   /* test_obtData */

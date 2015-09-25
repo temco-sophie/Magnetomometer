@@ -3,6 +3,11 @@ function cvVal = findCV (resultant)
 % INPUT resultant -> input vector
 % OUTPUT cvVal -> scalar, coefficient of variation value
 
+% Finding MEAN
 meanVal = mean(resultant);%#codegen
+
+% Finding standard deviation
 varVal = std(resultant(:));%standard deviation
-cvVal=varVal./meanVal;%test_obtData
+
+% Finding Coeeficient of variation
+cvVal=varVal/meanVal;%test_obtData
