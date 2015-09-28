@@ -26,13 +26,13 @@ box_stat=checkBox(ref_speed_box,speed_box,variation_box);
 if box_stat==1 %Box presence
     resultant = find_resultant(test_obtData1);
     cvVal=findCV(resultant);
-    [cvVal_all,avg_all]= checkInitialState(resultant,speed_box)
+    [cvVal_all,avg_all]= checkInitialState(resultant,speed_box);
 %   roller_noise = calcRollerEffect(test_obtData,roller_type,cvVal);
     load('roller_cond.mat');
     k=size(test_obtData1,1);
     roller_resultantAdjust=adjustRollerData(roller_resultant,k);
     roller_removed = filterRollerEffect(resultant,roller_resultantAdjust,roller_type);
-    [metal_stat,flag_stat]= checkMetal(cvVal,ref_cv,cvVal_all,avg_all)
+    [metal_stat,flag_stat]= checkMetal(cvVal,ref_cv,cvVal_all,avg_all);
     largenoisemetal_stat=checkLargeNoiseMetal(cvVal,max_cv);
     displayStatus(box_stat,speed_box,cvVal,metal_stat,largenoisemetal_stat,roller_type);
 %   plot_filtering(resultant,roller_noise,metal_stat);

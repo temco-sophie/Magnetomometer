@@ -1,6 +1,8 @@
-double find_CV(double *resultant,int rows){
+double test_CV(double *resultant,int rows){
 	double temp_mean=0.0,mean,sdev,cvVal,temp_var=0.0;
 	int i;
+	
+	printf("\nTESRTTT\n")
 	//Finding mean first
 	for(i=0;i<rows;i++){  		
   			temp_mean+=*(resultant+i); 

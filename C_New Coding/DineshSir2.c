@@ -4,9 +4,12 @@
 double total(int *rdata,int rows){
 	int result=0;
 	int i;
+	printf("Raju %d\n",*(rdata+1));
 	for(i=0;i<rows;i++){  		
-  			result+=*(rdata+i); 			  
+  			result+=*(rdata+i);
+			  printf("\nTest %d",result);						  
 	}
+	
 	double r=sqrt(result);
 	return r;
 }
@@ -33,6 +36,7 @@ int main ()
 {
    /* a pointer to an int */
    int *p;
+   double sumval;
    int i,j,length;
    int data[][COL] = {
 	{1, 0, 289, 242, -151, -43, 20, 437},
@@ -50,7 +54,8 @@ int main ()
    p=add(data,length);
    for(i=0;i<length;i++)
    printf("%d\n",*(p+i));
-   printf("\nSum=%lf\n",total(p,length));
+   sumval=total(p,length);
+   printf("\nSum=%lf\n",sumval);
    printf(" %d",sizeof(char));
    
     
