@@ -10,3 +10,4 @@ double * find_resultant(int *data,int rows){
 	}
 	return resultant;
 }
+

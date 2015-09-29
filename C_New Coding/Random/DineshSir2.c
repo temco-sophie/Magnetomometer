@@ -24,10 +24,7 @@ int * add(int *data,int rows)
   			*(result+i)+=*(data+i*COL+j);
   		
 	}
-	/*
-	*(result+0)=111;
-	*(result+1)=222;
-	*/
+	
   	return result;
 }
 

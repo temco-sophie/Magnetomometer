@@ -21,9 +21,10 @@ test_obtData=dataRead(test1);
 single_boxData=abstractBox(test_obtData);% Finding a particular box data
 test_obtData1=single_boxData{25}; % Taking random box for analysis
 speed_box=findBoxspeed(test_obtData1(:,2));
+speed_box=89;
 box_stat=checkBox(ref_speed_box,speed_box,variation_box);
 %   Test metal presence
-if box_stat==1 %Box presence
+% if box_stat==1 %Box presence
     resultant = find_resultant(test_obtData1);
     cvVal=findCV(resultant);
     [cvVal_all,avg_all]= checkInitialState(resultant,speed_box);
@@ -36,9 +37,9 @@ if box_stat==1 %Box presence
     largenoisemetal_stat=checkLargeNoiseMetal(cvVal,max_cv);
     displayStatus(box_stat,speed_box,cvVal,metal_stat,largenoisemetal_stat,roller_type);
 %   plot_filtering(resultant,roller_noise,metal_stat);
-else 
-    displayNoBoxStatus(box_stat,speed_box,roller_type);
-end
+% else 
+%     displayNoBoxStatus(box_stat,speed_box,roller_type);
+% end
 %  plot(1:size(resultant,1),[resultant aa])
 plot(1:size(resultant,1),resultant)
  legend('Roller Affected','Roller Noise Filtered')

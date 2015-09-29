@@ -7,14 +7,19 @@
 #include "checkBox.c"
 #include "find_resultant.c"
 #include "find_CV.c"
+#include "test_CV.c"
+#include "allCVnAVG.c"
+#include "checkMetal.c"
 
 
 int findBoxSpeed();
 int checkBox();
 double * find_resultant();
 double find_CV();
-double checkInitialStateCV();
+double *allCVnAVG();
 double test_CV();
+int checkMetal();
+double ref_cv=0.065;
 
 int main()
 {
@@ -213,74 +218,26 @@ int main()
 	};
 	int rows,speed_box,box_stat,i,j;
 	int ref_speed_box=10; //Set for test purpose: The assumption is desired box is active in opto range for 3 second 
-    int variation_box=5;
-    double *resultant,cvVal,cvVal_all;
+    int variation_box=5,metal_stat;
+    double *resultant,cvVal,*cvVal_all;
    
    	rows=sizeof(data)/sizeof(data[0]);
   	
   	printf("Magnetomometer Project Test\n");  
 	speed_box=findBoxSpeed(data,rows);
+	speed_box=rows-100;
+	//printf("\n Såeed %d",speed_box);
 	box_stat=checkBox(ref_speed_box,speed_box,variation_box);
 	resultant=find_resultant(data,rows);
-	/*for(i=0;i<rows;i++){
-		printf("\n %lf",*(resultant+i));
-	}*/
-	cvVal=find_CV(resultant,rows);	
-	cvVal_all= checkInitialStateCV(resultant,speed_box,rows);
-	printf("\n CV= %lf",cvVal);
-		
+	cvVal=find_CV(resultant,rows);
+	//printf("\n CV= %lf",cvVal);	
+	cvVal_all= allCVnAVG(resultant,speed_box,rows);
+	metal_stat= checkMetal(cvVal,ref_cv,cvVal_all);
+	printf("\nMetal Status = %d",metal_stat );			
 	return 1;
 }
 
-double checkInitialStateCV(double *resultant,int speed_box,int rows){
-	/*initialVal=resultant(1:50,:);
-    boxVal=resultant(50:50+speed_box,:);
-    lastVal=resultant(50+speed_box:end,:);
-    cvVal1=findCV(initialVal);
-    cvVal2=findCV(boxVal);
-    cvVal3=findCV(lastVal);
-    cvVal_all=[cvVal1 cvVal2 cvVal3];
-    avg1=mean(initialVal);
-    avg2=mean(boxVal);
-    avg3=mean(lastVal);
-    avg_all=[avg1 avg2 avg3]; */
-    double initialVal[50];
-	double *boxVal;
-	double lastVal[50];
-	double cvVal1,cvVal2;
-	int i,length_box,j;
-	
-	for(i=0;i<50;i++){
-		initialVal[i]=*(resultant+i);
-	//	printf("\n Initial [%d] %lf",i,initialVal[i]);
-	}
-	cvVal1=find_CV(initialVal,50);
-	printf("\naa%lf",cvVal1);
-	
 
-	boxVal=(resultant+50);
-	cvVal2=test_CV(boxVal,speed_box);
-	printf("\naa1 %lf",cvVal2);
-	
-	
-/*	printf("\n Initial [%d] %lf",i,*(boxVal));
-	for(i=50;i<(rows-50);i++){
-		j=i-50;
-	//	boxVal=(resultant+i);
-		printf("\n Initial [%d] %lf",i+1,*(boxVal+j));
-	}
-	
-	/*for(i=(rows-100);i<rows;i++){
-		lastVal[i-rows]=*(resultant+i);
-	}	
-	
-	/*length_box=rows-100;
-	cvVal1=find_CV(initialVal,50);
-	printf("\ncvVal1 = %lf",cvVal1)	;
-	cvVal2=find_CV(boxVal,length_box);
-	
-	printf("\ncvVal2 = %lf",cvVal2)	; */
-    
-}
+
 
 
