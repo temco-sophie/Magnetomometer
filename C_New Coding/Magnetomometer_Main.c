@@ -10,6 +10,7 @@
 #include "test_CV.c"
 #include "allCVnAVG.c"
 #include "checkMetal.c"
+#include "checkLargeNoiseMetal.c"
 
 
 int findBoxSpeed();
@@ -19,7 +20,8 @@ double find_CV();
 double *allCVnAVG();
 double test_CV();
 int checkMetal();
-double ref_cv=0.065;
+int checkLargeNoiseMetal();
+double ref_cv=0.065,max_cv=0.09;
 
 int main()
 {
@@ -218,24 +220,25 @@ int main()
 	};
 	int rows,speed_box,box_stat,i,j;
 	int ref_speed_box=10; //Set for test purpose: The assumption is desired box is active in opto range for 3 second 
-    int variation_box=5,metal_stat;
-    double *resultant,cvVal,*cvVal_all;
+    int variation_box=5,metal_stat,largenoisemetal_stat;
+    double *resultant,cvVal,*cvVal_all,max_cv=0.09;
    
    	rows=sizeof(data)/sizeof(data[0]);
   	
-  	printf("Magnetomometer Project Test\n");  
+  	printf("\n--------Magnetomometer Project--------\n");  
 	speed_box=findBoxSpeed(data,rows);
 	speed_box=rows-100;
-	//printf("\n Såeed %d",speed_box);
 	box_stat=checkBox(ref_speed_box,speed_box,variation_box);
 	resultant=find_resultant(data,rows);
 	cvVal=find_CV(resultant,rows);
-	//printf("\n CV= %lf",cvVal);	
 	cvVal_all= allCVnAVG(resultant,speed_box,rows);
 	metal_stat= checkMetal(cvVal,ref_cv,cvVal_all);
-	printf("\nMetal Status = %d",metal_stat );			
+	largenoisemetal_stat=checkLargeNoiseMetal(cvVal,max_cv);
+	printf("\n Large Metal Around  Status = %d",largenoisemetal_stat );			
 	return 1;
 }
+
+
 
 
 
