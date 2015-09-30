@@ -1,4 +1,4 @@
 int findBoxSpeed(data,length)
 {
-	return (length-2);
+	return (length-100);
 }

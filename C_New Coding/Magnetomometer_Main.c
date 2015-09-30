@@ -216,25 +216,63 @@ int main()
 		{ 186,  0,  285,   250,  -138,   -36,    -3,   429},    
 		{ 187,  0,  285,   250,  -138,   -36,    -3,   429},    
 		{ 188,  0,  281,   236,  -127,   -65,    15,   428},    
-		{ 189,  0,  281,   236,  -127,   -65,    15,   428},    
+		{ 189,  0,  281,   236,  -127,   -65,    15,   428}, 
+			{ 160,  0,  293,   249,  -158,   -47,    24,   410},    
+		{ 161,  0,  293,   249,  -158,   -47,    24,   410},    
+		{ 162,  0,  272,   240,  -136,   -47,    24,   410},    
+		{ 163,  0,  272,   240,  -136,   -59,     7,   420},    
+		{ 164,  0,  272,   240,  -136,   -59,     7,   420},    
+		{ 165,  0,  301,   237,  -144,   -49,    15,   422},    
+		{ 166,  0,  301,   237,  -144,   -49,    15,   422},    
+		{ 167,  0,  301,   237,  -144,   -49,    15,   422},    
+		{ 168,  0,  332,   229,  -158,   -72,    13,   417},    
+		{ 169,  0,  332,   229,  -158,   -72,    13,   417},    
+		{ 170,  0,  332,   229,  -158,   -40,     2,   428},    
+		{ 171,  0,  304,   262,  -159,   -40,     2,   428},    
+		{ 172,  0,  304,   262,  -159,   -40,     2,   428},    
+		{ 173,  0,  304,   262,  -159,   -66,     2,   419},    
+		{ 174,  0,  286,   255,  -152,   -66,     2,   419},    
+		{ 175,  0,  286,   255,  -152,   -18,     2,   430},    
+		{ 176,  0,  286,   255,  -152,   -18,     2,   430},    
+		{ 177,  0,  279,   241,  -131,   -18,     2,   430},    
+		{ 178,  0,  279,   241,  -131,   -68,     6,   413},    
+		{ 179,  0,  279,   241,  -131,   -68,     6,   413},    
+		{ 180,  0,  311,   214,  -156,   -26,     8,   428},    
+		{ 181,  0,  311,   214,  -156,   -26,     8,   428},    
+		{ 182,  0,  311,   214,  -156,   -26,     8,   428},    
+		{ 183,  0,  300,   248,  -161,   -56,     0,   428},    
+		{ 184,  0,  300,   248,  -161,   -56,     0,   428},    
+		{ 185,  0,  300,   248,  -161,   -56,     0,   428},    
+		{ 186,  0,  285,   250,  -138,   -36,    -3,   429},    
+		{ 187,  0,  285,   250,  -138,   -36,    -3,   429},    
+		{ 188,  0,  281,   236,  -127,   -65,    15,   428},    
+		{ 189,  0,  281,   236,  -127,   -65,    15,   428},   
 	};
 	int rows,speed_box,box_stat,i,j;
-	int ref_speed_box=10; //Set for test purpose: The assumption is desired box is active in opto range for 3 second 
-    int variation_box=5,metal_stat,largenoisemetal_stat;
+	int ref_speed_box=150; //Set for test purpose: The assumption is desired box is active in opto range for 3 second 
+    int variation_box=50,metal_stat,largenoisemetal_stat;
     double *resultant,cvVal,*cvVal_all,max_cv=0.09;
    
    	rows=sizeof(data)/sizeof(data[0]);
+   	printf("%d",rows);
   	
   	printf("\n--------Magnetomometer Project--------\n");  
-	speed_box=findBoxSpeed(data,rows);
 	speed_box=rows-100;
 	box_stat=checkBox(ref_speed_box,speed_box,variation_box);
-	resultant=find_resultant(data,rows);
-	cvVal=find_CV(resultant,rows);
-	cvVal_all= allCVnAVG(resultant,speed_box,rows);
-	metal_stat= checkMetal(cvVal,ref_cv,cvVal_all);
-	largenoisemetal_stat=checkLargeNoiseMetal(cvVal,max_cv);
-	printf("\n Large Metal Around  Status = %d",largenoisemetal_stat );			
+	printf("\nBOX STAT = %d",box_stat);
+	if(box_stat==1){
+		resultant=find_resultant(data,rows);
+		cvVal=find_CV(resultant,rows);
+		cvVal_all= allCVnAVG(resultant,speed_box,rows);
+		metal_stat= checkMetal(cvVal,ref_cv,cvVal_all);
+		largenoisemetal_stat=checkLargeNoiseMetal(cvVal,max_cv);
+		printf("\n Metal Status = %d",metal_stat );
+		printf("\n Large Metal Around  Status = %d",largenoisemetal_stat );			
+	}
+	else{
+		printf("\nNo real box Present");
+	}
+			
 	return 1;
 }
 
