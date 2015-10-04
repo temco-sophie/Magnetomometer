@@ -12,5 +12,4 @@ function roller_removed = filterRollerEffect(resultant,roller_resultantAdjust,ro
         roller_resultantAdjust =a+(b-a).*rand(size(resultant));
         roller_removed=resultant-roller_resultantAdjust;
     end
-
 end

@@ -9,7 +9,7 @@ function [metal_stat,flag_stat]= checkMetal(cvVal,ref_cv,cvVal_all,avg_all)
     flag_initial=0;
     flag_last=0;
 
-    if cvVal>=ref_cv && avg_all(2)> avg_all(1) 
+    if cvVal>=ref_cv || avg_all(2)> (avg_all(1)+20) && avg_all(3)< (avg_all(2)+20)
         metal_stat=1; %BOX present
     %     disp('CONTAMINATED BOX--METAL DETECTED');
     else

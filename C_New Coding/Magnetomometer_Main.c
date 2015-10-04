@@ -21,7 +21,6 @@ double *allCVnAVG();
 double test_CV();
 int checkMetal();
 int checkLargeNoiseMetal();
-double ref_cv=0.065,max_cv=0.09;
 
 int main()
 {
@@ -217,7 +216,7 @@ int main()
 		{ 187,  0,  285,   250,  -138,   -36,    -3,   429},    
 		{ 188,  0,  281,   236,  -127,   -65,    15,   428},    
 		{ 189,  0,  281,   236,  -127,   -65,    15,   428}, 
-			{ 160,  0,  293,   249,  -158,   -47,    24,   410},    
+		{ 160,  0,  293,   249,  -158,   -47,    24,   410},    
 		{ 161,  0,  293,   249,  -158,   -47,    24,   410},    
 		{ 162,  0,  272,   240,  -136,   -47,    24,   410},    
 		{ 163,  0,  272,   240,  -136,   -59,     7,   420},    
@@ -249,13 +248,11 @@ int main()
 		{ 189,  0,  281,   236,  -127,   -65,    15,   428},   
 	};
 	int rows,speed_box,box_stat,i,j;
-	int ref_speed_box=150; //Set for test purpose: The assumption is desired box is active in opto range for 3 second 
-    int variation_box=50,metal_stat,largenoisemetal_stat;
-    double *resultant,cvVal,*cvVal_all,max_cv=0.09;
+	int ref_speed_box=125,variation_box=50,metal_stat,largenoisemetal_stat;
+    double *resultant,cvVal,*cvVal_all,max_cv=0.065,ref_cv=0.045;
    
    	rows=sizeof(data)/sizeof(data[0]);
-   	printf("%d",rows);
-  	
+   	  	
   	printf("\n--------Magnetomometer Project--------\n");  
 	speed_box=rows-100;
 	box_stat=checkBox(ref_speed_box,speed_box,variation_box);
@@ -275,6 +272,8 @@ int main()
 			
 	return 1;
 }
+
+
 
 
 
