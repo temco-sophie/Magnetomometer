@@ -25,7 +25,6 @@ int checkLargeNoiseMetal();
 int main()
 {
 	
-	
 	int data[][col] = {
 		{   1,  0,  289,   242,  -151,   -43,    20,   437},    
 		{   2,  0,  289,   242,  -151,   -43,    20,   437},    
@@ -248,19 +247,19 @@ int main()
 		{ 189,  0,  281,   236,  -127,   -65,    15,   428},   
 	};
 	int rows,speed_box,box_stat,i,j;
-	int ref_speed_box=125,variation_box=50,metal_stat,largenoisemetal_stat;
+	int ref_speed_box=125,variation_box=50,metal_stat,largenoisemetal_stat,optoOnPos=50;
     double *resultant,cvVal,*cvVal_all,max_cv=0.065,ref_cv=0.045;
    
    	rows=sizeof(data)/sizeof(data[0]);
    	  	
   	printf("\n--------Magnetomometer Project--------\n");  
-	speed_box=rows-100;
+	speed_box=rows-2*optoOnPos;
 	box_stat=checkBox(ref_speed_box,speed_box,variation_box);
 	printf("\nBOX STAT = %d",box_stat);
 	if(box_stat==1){
 		resultant=find_resultant(data,rows);
 		cvVal=find_CV(resultant,rows);
-		cvVal_all= allCVnAVG(resultant,speed_box,rows);
+		cvVal_all= allCVnAVG(resultant,speed_box,rows,optoOnPos);
 		metal_stat= checkMetal(cvVal,ref_cv,cvVal_all);
 		largenoisemetal_stat=checkLargeNoiseMetal(cvVal,max_cv);
 		printf("\n Metal Status = %d",metal_stat );
@@ -272,12 +271,4 @@ int main()
 			
 	return 1;
 }
-
-
-
-
-
-
-
-
 
